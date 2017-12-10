@@ -1,0 +1,120 @@
+1 加入需要的依赖
+
+<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>2.3.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		
+2 编写web.xml
+	核心就是配置springmvc的核心控制器
+	dispatcherServlet
+	
+		
+	<servlet>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:springmvc-servlet.xml</param-value>
+		</init-param>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+3 编写springmvc-servelt.xml
+	
+<!-- 	 扫描包 -->
+	<context:component-scan base-package="com.bdqn"></context:component-scan>
+<!-- 	mvc注解启动 -->
+	<mvc:annotation-driven></mvc:annotation-driven>
+<!-- 	配置视图解析器 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/"></property>	
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+4 编写jsp与controller进行测试
+	package com.bdqn.action;
+	
+	import org.springframework.stereotype.Controller;
+	import org.springframework.web.bind.annotation.RequestMapping;
+	
+	@Controller
+	public class HelloWorld {
+	
+		
+		@RequestMapping(value="/helloworld")
+		public String hello() {
+			System.out.println("进来了");
+			return "suc";
+		}
+	}
+
+	
+	
+	
+	
+	
+	
+5 restful风格
+	Representational State Transfer
+	一种软件架构风格、设计风格，而不是标准，只是提供了一组设计原则和约束条件。
+	它主要用于客户端和服务器交互类的软件。基于这个风格设计的软件可以更简洁，更有层次，更易于实现缓存等机制。	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
